@@ -19,7 +19,7 @@ class Phonebook extends Component {
 
   addContacts = ({ name, number }) => {
     const { contacts } = this.state;
-    const chekContacts = contacts.some(contact => contact.name === name);
+    const chekContacts = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
     if (chekContacts) {
       alert(`${name} is already in contacts.`);
       return;
