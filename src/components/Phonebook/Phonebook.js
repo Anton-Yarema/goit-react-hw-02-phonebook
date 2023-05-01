@@ -1,9 +1,9 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import ContactForm from 'components/ContactForm/';
 import { nanoid } from 'nanoid';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
-import ElementContactItem from 'components/ElementContactItem';
 import css from './Phonebook.module.css';
 
 class Phonebook extends Component {
@@ -19,7 +19,9 @@ class Phonebook extends Component {
 
   addContacts = ({ name, number }) => {
     const { contacts } = this.state;
-    const chekContacts = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase());
+    const chekContacts = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
     if (chekContacts) {
       alert(`${name} is already in contacts.`);
       return;
@@ -52,16 +54,30 @@ class Phonebook extends Component {
         <ContactForm onSubmit={this.addContacts} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactList>
-          <ElementContactItem
-            value={filter}
-            data={contacts}
-            onDeleteContact={this.deleteContact}
-          />
-        </ContactList>
+        <ContactList
+          value={filter}
+          data={contacts}
+          onDeleteContact={this.deleteContact}
+        />
+          
+        
       </div>
     );
   }
 }
+
+Phonebook.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    }),
+  ),
+  filter: PropTypes.string,
+  addContacts: PropTypes.func,
+  handleFilterChange: PropTypes.func,
+  deleteContact: PropTypes.func,
+};
 
 export default Phonebook;
