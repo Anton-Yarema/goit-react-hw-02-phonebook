@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ElementContactItem from 'components/ElementContactItem/';
 
-const ContactList = ({ value, data, onDeleteContact }) => {
-  const normalizedFilter = value.toLowerCase();
-  const filterContacts = data.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
+const ContactList = ({ onFiltred, onDeleteContact }) => {
+  // const normalizedFilter = value.toLowerCase();
+  // const filterContacts = data.filter(contact =>
+  //   contact.name.toLowerCase().includes(normalizedFilter)
+  // );
 
   return (
     <ul>
-      {filterContacts.map(contact => (
+      {onFiltred().map(contact => (
         <ElementContactItem
           key={contact.id}
           {...contact}

@@ -36,6 +36,15 @@ class Phonebook extends Component {
     }));
   };
 
+  filtredName = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   handleFilterChange = event => {
     this.setState({ filter: event.currentTarget.value });
   };
@@ -55,12 +64,11 @@ class Phonebook extends Component {
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilterChange} />
         <ContactList
-          value={filter}
-          data={contacts}
+          // value={filter}
+          // data={contacts}
           onDeleteContact={this.deleteContact}
+          onFiltred={this.filtredName}
         />
-          
-        
       </div>
     );
   }
@@ -72,7 +80,7 @@ Phonebook.propTypes = {
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
-    }),
+    })
   ),
   filter: PropTypes.string,
   addContacts: PropTypes.func,
