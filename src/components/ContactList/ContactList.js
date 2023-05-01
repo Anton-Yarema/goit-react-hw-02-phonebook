@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import ElementContactItem from 'components/ElementContactItem/';
 
 const ContactList = ({ onFiltred, onDeleteContact }) => {
-  // const normalizedFilter = value.toLowerCase();
-  // const filterContacts = data.filter(contact =>
-  //   contact.name.toLowerCase().includes(normalizedFilter)
-  // );
-
+ 
   return (
     <ul>
       {onFiltred().map(contact => (
@@ -21,16 +17,9 @@ const ContactList = ({ onFiltred, onDeleteContact }) => {
   );
 };
 
-ContactList.propTypes = {
-  value: PropTypes.string,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
+ContactList.propTypes = { 
   onDeleteContact: PropTypes.func.isRequired,
+  onFiltred: PropTypes.func,
 };
 
 export default ContactList;
